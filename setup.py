@@ -12,7 +12,7 @@ DESC = 'Dimension of a quantity in Python language.'
 URL = 'https://github.com/pboymt/dimit'
 EMAIL = os.getenv('PypiEmail')
 AUTHOR = os.getenv('PypiAuthor')
-REQUIRES_PYTHON = '>=3.6.0'
+REQUIRES_PYTHON = '>=3.9.0'
 VERSION: str = None  # '0.0.1'
 
 # What packages are required for this module to be executed?
@@ -115,9 +115,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
