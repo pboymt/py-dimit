@@ -25,6 +25,23 @@ class TestDimension(TestCase):
         self.assertEqual(Dimension("L").dim_dict, {'L': 1, 'M': 0, 'T': 0})
         self.assertEqual(Dimension("LT-1").dim_dict, {'L': 1, 'M': 0, 'T': -1})
 
+    def test_multiply(self):
+        self.assertEqual(Dimension("L") * Dimension("M"), Dimension("LM"))
+        self.assertEqual(Dimension("L") * Dimension("M") *
+                         Dimension("T"), Dimension("LMT"))
+        self.assertEqual(Dimension("L") * Dimension("M") *
+                         Dimension("T") * Dimension("L"), Dimension("L2MT"))
+        self.assertEqual(L*M*T, Dimension("LMT"))
+        self.assertEqual(L*M*T*DIMLESS, Dimension("LMT"))
+        self.assertEqual(L*M*T*DIMLESS*DIMLESS, Dimension("LMT"))
+
+    def test_power(self):
+        self.assertEqual(L**2, Dimension("L2"))
+        self.assertEqual(L**3, Dimension("L3"))
+        self.assertEqual(L**4, Dimension("L4"))
+        self.assertEqual(L**5, Dimension("L5"))
+        self.assertEqual((L*M*T)**2, Dimension("L2M2T2"))
+
 
 if __name__ == '__main__':
     main()

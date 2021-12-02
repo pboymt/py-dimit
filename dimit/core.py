@@ -59,13 +59,13 @@ class Dimension:
         return self.__str__()
 
     def __mul__(self, other: 'Dimension'):
-        return Dimension(self.dimension + other.dimension)
+        return Dimension(self.to_str() + other.to_str())
 
     def __truediv__(self, other: 'Dimension'):
-        return Dimension(self.dimension + (other ** -1).dimension)
+        return Dimension(self.to_str() + (other ** -1).to_str())
 
     def __pow__(self, power: int):
-        dim = Dimension(self.dimension)
+        dim = Dimension(self.to_str())
         for d in dim.dim_dict:
             dim.dim_dict[d] *= power
         return dim
