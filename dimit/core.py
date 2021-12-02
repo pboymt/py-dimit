@@ -58,6 +58,9 @@ class Dimension:
     def __repr__(self) -> str:
         return self.__str__()
 
+    def __hash__(self) -> int:
+        return hash(self.to_str())
+
     def __mul__(self, other: 'Dimension'):
         return Dimension(self.to_str() + other.to_str())
 
