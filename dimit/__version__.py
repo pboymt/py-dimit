@@ -1,5 +1,5 @@
 # Version of the dimit package
 
-VERSION = (0, 0, 3)
+VERSION = (0, 0, 4)
 
 __version__ = '.'.join(map(str, VERSION))
