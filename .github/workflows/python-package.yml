@@ -26,7 +26,6 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        echo ${{ secrets.PYPI_API_TOKEN }}
         python -m pip install --upgrade pip
         python -m pip install flake8 tox
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -41,4 +40,4 @@ jobs:
         PypiEmail: ${{ secrets.PYPI_EMAIL }}
         PypiAuthor: ${{ secrets.PYPI_AUTHOR }}
       run: |
-        pytest
+        tox
