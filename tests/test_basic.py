@@ -42,6 +42,9 @@ class TestDimension(TestCase):
         self.assertEqual(L**5, Dimension("L5"))
         self.assertEqual((L*M*T)**2, Dimension("L2M2T2"))
 
+    def test_hashable(self):
+        hash(Dimension("L"))
+
 
 if __name__ == '__main__':
     main()
