@@ -32,8 +32,7 @@ class Dimension:
     def T(self) -> Decimal:
         return self.dim_dict["T"]
 
-    @property
-    def dimension(self):
+    def to_str(self):
         output = ""
         for d in self.dim_dict:
             t = self.dim_dict[d]
@@ -54,7 +53,7 @@ class Dimension:
                 raise ValueError(f"Dimension {d} is not allowed.")
 
     def __str__(self) -> str:
-        return f"Dimension({self.__str__()})"
+        return f"Dimension({self.to_str()})"
 
     def __repr__(self) -> str:
         return self.__str__()
