@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  run-test:
 
     runs-on: ubuntu-latest
     strategy:
@@ -26,8 +26,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        echo ${{ secrets.PYPI_API_TOKEN }}
         python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
+        python -m pip install flake8 tox
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -35,7 +36,7 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Test with tox
       env:
         PypiEmail: ${{ secrets.PYPI_EMAIL }}
         PypiAuthor: ${{ secrets.PYPI_AUTHOR }}

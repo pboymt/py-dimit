@@ -16,7 +16,7 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
-
+    environment: Pypi
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
@@ -28,9 +28,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install build
     - name: Build package
+      env:
+          PypiEmail: ${{ secrets.PYPI_EMAIL }}
+          PypiAuthor: ${{ secrets.PYPI_AUTHOR }}
       run: python -m build
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
+      env:
+          PypiEmail: ${{ secrets.PYPI_EMAIL }}
+          PypiAuthor: ${{ secrets.PYPI_AUTHOR }}
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
