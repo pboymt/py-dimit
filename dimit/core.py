@@ -1,7 +1,8 @@
 from decimal import Decimal
 import re
+from typing import Union
 
-__DIMEMSION_REGEX__ = re.compile(r'(?P<dim>\S)(?P<time>-?\d+)?')
+__DIMEMSION_REGEX__ = re.compile(r'(?P<dim>[LMT])(?P<time>-?[0-9]+(?:\.[0-9]+)?)?')
 
 __allowed_dimensions__ = ('L', 'M', 'T')
 
@@ -10,9 +11,9 @@ class Dimension:
 
     def __init__(self, dimension: str = ""):
         self.dim_dict = {
-            "L": Decimal(0),
-            "M": Decimal(0),
-            "T": Decimal(0),
+            "L": Decimal('0.0'),
+            "M": Decimal('0.0'),
+            "T": Decimal('0.0'),
         }
         self.parse(dimension)
 
@@ -36,9 +37,9 @@ class Dimension:
         output = ""
         for d in self.dim_dict:
             t = self.dim_dict[d]
-            if t == 0:
+            if t == Decimal('0'):
                 continue
-            if t == 1:
+            if t == Decimal('1'):
                 output += d
             else:
                 output += f"{d}{t}"
@@ -67,10 +68,10 @@ class Dimension:
     def __truediv__(self, other: 'Dimension'):
         return Dimension(self.to_str() + (other ** -1).to_str())
 
-    def __pow__(self, power: int):
+    def __pow__(self, power: Union[int, float, Decimal]):
         dim = Dimension(self.to_str())
         for d in dim.dim_dict:
-            dim.dim_dict[d] *= power
+            dim.dim_dict[d] = dim.dim_dict[d] * Decimal(power.__str__())
         return dim
 
     def __eq__(self, __o: object) -> bool:

@@ -1,8 +1,15 @@
+from decimal import Decimal
 from unittest import TestCase, main
 from .context import Dimension, L, M, T, DIMLESS
 
 
 class TestDimension(TestCase):
+
+    def test_init(self):
+        L*L
+        L**0.2
+        Dimension("L-0.3")
+        Dimension("L3")
 
     def test_equal(self):
         self.assertEqual(Dimension("L"), L)
@@ -41,6 +48,8 @@ class TestDimension(TestCase):
         self.assertEqual(L**4, Dimension("L4"))
         self.assertEqual(L**5, Dimension("L5"))
         self.assertEqual((L*M*T)**2, Dimension("L2M2T2"))
+        self.assertEqual(L**0.2, Dimension("L0.2"))
+        self.assertEqual(L**0.2*M**2, Dimension("L0.2M2"))
 
     def test_hashable(self):
         hash(Dimension("L"))
